@@ -25,11 +25,11 @@
  */
 
 import {AlertService} from './alert.service';
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {ElasticSearchService, AlertGroup} from './elasticsearch.service';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AlertGroup, ElasticSearchService} from './elasticsearch.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MousetrapService} from './mousetrap.service';
-import {AppService, AppEvent, AppEventCode} from './app.service';
+import {AppEvent, AppEventCode, AppService} from './app.service';
 import {EventService} from './event.service';
 import {ToastrService} from './toastr.service';
 import {TopNavService} from './topnav.service';
@@ -328,7 +328,7 @@ export class AlertsComponent implements OnInit, OnDestroy {
     }
 
     archiveSelected() {
-        let selected = this.rows.filter((row: any) => {
+        let selected = this.allRows.filter((row: any) => {
             return row.selected &&
                     row.event.event._source.tags.indexOf('archived') < 0;
         });
@@ -442,6 +442,12 @@ export class AlertsComponent implements OnInit, OnDestroy {
         this.rows.forEach((row: any) => {
             row.selected = true;
         });
+    }
+
+    selectAllInResultSet() {
+        this.allRows.forEach((row: any) => {
+            row.selected = true;
+        })
     }
 
     deselectAllRows() {

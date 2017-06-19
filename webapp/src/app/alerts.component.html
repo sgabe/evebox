@@ -18,28 +18,53 @@
          style="position: fixed; width: 100%; margin-top: 20px;">
       <div class="row" style="margin-right: 14px;">
         <div class="col-md-6">
+          
           <button type="button" class="btn btn-default" (click)="refresh()">
             Refresh
           </button>
-          <button *ngIf="rows && rows.length > 0 && !allSelected()"
-                  type="button"
-                  class="btn btn-default"
-                  (click)="selectAllRows()">Select All
-          </button>
-          <button *ngIf="rows && rows.length > 0 && allSelected()" type="button"
+
+          <!-- Select all... -->
+          <!--<button *ngIf="rows && rows.length > 0 && !allSelected()"-->
+                  <!--type="button"-->
+                  <!--class="btn btn-default"-->
+                  <!--(click)="selectAllRows()">Select All-->
+          <!--</button>-->
+
+          <div *ngIf="rows && rows.length > 0" class="btn-group"
+               style="z-index: 1001;">
+            <button type="button" class="btn btn-default"
+                    (click)="selectAllRows()">Select All
+            </button>
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="javascript:void(0);"
+                     (click)="selectAllInResultSet()">Select All in Search
+                Result</a></li>
+            </ul>
+          </div>
+
+          <button *ngIf="rows && rows.length > 0 && getSelectedCount() > 0" type="button"
                   class="btn btn-default"
                   (click)="deselectAllRows()">Deselect All
           </button>
+
           <button *ngIf="rows && rows.length > 0 && getSelectedCount() > 0"
                   type="button"
                   class="btn btn-default"
                   (click)="archiveSelected()">Archive
           </button>
+
           <button *ngIf="rows && rows.length > 0 && getSelectedCount() > 0"
                   type="button"
                   class="btn btn-default"
                   (click)="escalateSelected()">Escalate
           </button>
+
         </div>
         <div class="col-md-6">
 
@@ -100,13 +125,15 @@
                   type="button"
                   class="btn btn-default" (click)="newer()">Newer
           </button>
-          <button [disabled]="rows.length == allRows.length || offset + windowSize >= allRows.length"
-                  type="button"
-                  class="btn btn-default" (click)="older()">Older
+          <button
+              [disabled]="rows.length == allRows.length || offset + windowSize >= allRows.length"
+              type="button"
+              class="btn btn-default" (click)="older()">Older
           </button>
-          <button [disabled]="rows.length == allRows.length || offset + windowSize >= allRows.length"
-                  type="button"
-                  class="btn btn-default" (click)="oldest()">Oldest
+          <button
+              [disabled]="rows.length == allRows.length || offset + windowSize >= allRows.length"
+              type="button"
+              class="btn btn-default" (click)="oldest()">Oldest
           </button>
           <div class="btn-group" role="group">
             <button type="button"
@@ -154,13 +181,15 @@
                   type="button"
                   class="btn btn-default" (click)="newer()">Newer
           </button>
-          <button [disabled]="rows.length == allRows.length || offset + windowSize >= allRows.length"
-                  type="button"
-                  class="btn btn-default" (click)="older()">Older
+          <button
+              [disabled]="rows.length == allRows.length || offset + windowSize >= allRows.length"
+              type="button"
+              class="btn btn-default" (click)="older()">Older
           </button>
-          <button [disabled]="rows.length == allRows.length || offset + windowSize >= allRows.length"
-                  type="button"
-                  class="btn btn-default" (click)="oldest()">Oldest
+          <button
+              [disabled]="rows.length == allRows.length || offset + windowSize >= allRows.length"
+              type="button"
+              class="btn btn-default" (click)="oldest()">Oldest
           </button>
           <div class="btn-group" role="group">
             <button type="button"

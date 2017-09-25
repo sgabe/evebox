@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  postgres:
+    image: jasonish/evebox-postgresql:latest
+    volumes:
+      - ./pgdata:/var/lib/pgsql
+    environment:
+      - PGPASSWORD=evebox
+  evebox:
+    image: jasonish/evebox:master
+    environment:
+      - PGMANAGED=false
+      - PGHOST=postgres
+      - PGSSLMODE=disable
+      - PGPASSWORD=evebox
+    command: evebox --datastore postgresql --input /var/log/suricata/eve.json
+    depends_on:
+      - "postgres"
+    ports:
+      - "5636:5636"
+    volumes:
+      - /var/log/suricata:/var/log/suricata

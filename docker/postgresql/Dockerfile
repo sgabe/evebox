@@ -9,4 +9,5 @@ RUN rpm -i https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_6
 
 COPY /docker-entrypoint.sh /docker-entrypoint.sh
 EXPOSE 5432
+VOLUME /var/lib/pgsql
 ENTRYPOINT /docker-entrypoint.sh

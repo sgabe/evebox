@@ -218,6 +218,10 @@ func (s *ReportService) ReportAggs(agg string, options core.ReportOptions) (inte
 		// SSH.
 		"ssh.client.software_version": "keyword",
 		"ssh.server.software_version": "keyword",
+
+		// TLS
+		"tls.sni":     "keyword",
+		"tls.subject": "keyword",
 	}
 
 	aggType := aggregations[agg]
@@ -226,20 +230,27 @@ func (s *ReportService) ReportAggs(agg string, options core.ReportOptions) (inte
 		aggType = "term"
 	}
 
+	var field string
+
 	if aggType == "keyword" {
-		query.Aggs[agg] = map[string]interface{}{
-			"terms": map[string]interface{}{
-				"field": s.es.FormatKeyword(agg),
-				"size":  size,
-			},
-		}
+		field = s.es.FormatKeyword(agg)
 	} else {
-		query.Aggs[agg] = map[string]interface{}{
-			"terms": map[string]interface{}{
-				"field": agg,
-				"size":  size,
+		field = agg
+	}
+
+	order := "DESC"
+	if options.Order == "ASC" {
+		order = "ASC"
+	}
+
+	query.Aggs[agg] = map[string]interface{}{
+		"terms": map[string]interface{}{
+			"field": field,
+			"size":  size,
+			"order": map[string]interface{}{
+				"_count": order,
 			},
-		}
+		},
 	}
 
 	response, err := s.es.Search(query)

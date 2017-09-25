@@ -89,6 +89,7 @@ import {ThemeService} from './shared/theme.service';
 import {SettingsService} from './settings.service';
 import {EveboxPrintablePipe} from './pipes/printable.pipe';
 import {RuleHighlightPipe} from './pipes/rule-highlight.pipe';
+import {CustomReportComponent} from './reports/custom-report.component';
 
 @NgModule({
     declarations: [
@@ -141,6 +142,7 @@ import {RuleHighlightPipe} from './pipes/rule-highlight.pipe';
 
         SettingsComponent,
         EveboxCommentInput,
+        CustomReportComponent,
     ],
     imports: [
         // Angular modules.

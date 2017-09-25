@@ -39,6 +39,7 @@ import {LoginComponent} from './login/login.component';
 import {ConfigService} from './config.service';
 import {ApiService} from 'app/api.service';
 import {SettingsComponent} from './settings/settings.component';
+import {CustomReportComponent} from './reports/custom-report.component';
 
 declare var window: any;
 
@@ -124,15 +125,38 @@ const routes: Routes = [
                 path: 'events', component: EventsComponent, pathMatch: 'prefix',
             }
             ,
-            {path: 'reports/alerts', component: AlertReportComponent},
-            {path: 'reports/dns', component: DNSReportComponent},
-            {path: 'reports/flow', component: FlowReportComponent},
-            {path: 'reports/netflow', component: NetflowReportComponent},
-            {path: 'reports/ssh', component: SshReportComponent},
             {
-                path: 'reports/ip',
-                component: IpReportComponent,
-                pathMatch: 'prefix',
+                path: "reports", pathMatch: "prefix", children: [
+                {
+                    path: 'alerts',
+                    component: AlertReportComponent
+                },
+                {
+                    path: 'dns',
+                    component: DNSReportComponent
+                },
+                {
+                    path: 'flow',
+                    component: FlowReportComponent
+                },
+                {
+                    path: 'netflow',
+                    component: NetflowReportComponent
+                },
+                {
+                    path: 'ssh',
+                    component: SshReportComponent
+                },
+                {
+                    path: 'ip',
+                    component: IpReportComponent,
+                    pathMatch: 'prefix',
+                },
+                {
+                    path: "custom",
+                    component: CustomReportComponent,
+                }
+            ]
             },
 
             {

@@ -187,7 +187,6 @@ export class ApiService {
     }
 
     get(path: string, options: RequestOptionsArgs = {}): Promise<any> {
-        console.log(options);
         return this.request("GET", path, options)
                 .map(res => res.json())
                 .toPromise();
@@ -368,8 +367,16 @@ export interface ReportHistogramOptions {
 
 // Options for an aggregation report.
 export interface ReportAggOptions {
+
+    // Number of results to return.
     size?: number;
+
+    // Order of results by count. Default: DESC.
+    order?: string;
+
+    // Query string to apply as a filter.
     queryString?: string;
+
     timeRange?: number;
 
     // Event type.

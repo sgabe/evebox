@@ -114,7 +114,11 @@ func EventQueryOptionsFromHttpRequest(r *http.Request) (EventQueryOptions, error
 }
 
 type ReportOptions struct {
+	// Number of results.
 	Size int64
+
+	// Order of results. Default: DESC.
+	Order string
 
 	QueryString string
 

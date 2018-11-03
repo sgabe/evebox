@@ -37,6 +37,9 @@ const (
 
 	// Server supports event commenting.
 	FEATURE_COMMENTS
+
+	// Server supports MikroTik devices.
+	FEATURE_MIKROTIK
 )
 
 func (f Feature) String() string {
@@ -45,6 +48,8 @@ func (f Feature) String() string {
 		return "reporting"
 	case FEATURE_COMMENTS:
 		return "comments"
+	case FEATURE_MIKROTIK:
+		return "mikrotik"
 	}
 	return ""
 }

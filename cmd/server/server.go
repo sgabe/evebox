@@ -374,6 +374,7 @@ func Main(args []string) {
 		if err := sqlite.InitSqlite(&appContext); err != nil {
 			log.Fatal(err)
 		}
+		appContext.SetFeature(core.FEATURE_MIKROTIK)
 	case "postgresql":
 
 		var pgConfig postgres.PgConfig

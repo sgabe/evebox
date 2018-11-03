@@ -389,6 +389,9 @@ func (s *DataStore) DeEscalateAlertGroup(p core.AlertGroupQueryParams, user core
 		log.Debug("De-escalated/unstarred %d events", count)
 	}
 
+	// Remove the source IP address from the pre-configured address list.
+	err = mikrotik.RemoveIPAddressFromList(p.SrcIP)
+
 	return err
 }
 

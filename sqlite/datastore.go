@@ -34,6 +34,7 @@ import (
 	"github.com/jasonish/evebox/eve"
 	"github.com/jasonish/evebox/log"
 	"github.com/jasonish/evebox/util"
+	"github.com/jasonish/evebox/mikrotik"
 	"github.com/pkg/errors"
 	"strconv"
 	"strings"
@@ -335,6 +336,9 @@ func (s *DataStore) EscalateAlertGroup(p core.AlertGroupQueryParams, user core.U
 
 	duration := time.Now().Sub(start)
 	log.Debug("Escalated/starred %d alerts in %v", count, duration)
+
+	// Add the source IP address to the pre-configured address list.
+	err = mikrotik.AddIPAddressToList(p.SrcIP, strconv.FormatUint(p.SignatureID, 10))
 
 	return err
 }

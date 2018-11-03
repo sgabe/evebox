@@ -43,12 +43,14 @@ install-deps:
 	$(MAKE) -C webapp $@
 	go get github.com/cespare/reflex
 	go get github.com/gobuffalo/packr/packr
+	go get gopkg.in/routeros.v2
 	go mod download
 
 update-deps:
 	go get -u github.com/golang/dep/cmd/dep
 	go get -u github.com/cespare/reflex
 	go get -u github.com/gobuffalo/packr/packr
+	go get -u gopkg.in/routeros.v2
 	$(GOPATH)/bin/dep ensure -update
 
 clean:

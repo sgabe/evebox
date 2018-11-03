@@ -43,7 +43,9 @@ import (
 	"github.com/jasonish/evebox/server"
 	"github.com/jasonish/evebox/sqlite"
 	"github.com/jasonish/evebox/sqlite/configdb"
-	"github.com/jasonish/evebox/useragent"
+	// User-Agent Parser is currently not compatible with ARM architecture.
+	// For more information, see https://github.com/ua-parser/uap-go/issues/38
+	// "github.com/jasonish/evebox/useragent"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 	"strings"
@@ -470,7 +472,10 @@ func initInternalEveReader(appContext *appcontext.AppContext, inputStart bool) {
 
 	eveFileProcessor.AddFilter(&eve.TagsFilter{})
 	eveFileProcessor.AddFilter(eve.NewGeoipFilter(appContext.GeoIpService))
-	eveFileProcessor.AddFilter(&useragent.EveUserAgentFilter{})
+
+	// User-Agent Parser is currently not compatible with ARM architecture.
+	// For more information, see https://github.com/ua-parser/uap-go/issues/38
+	// eveFileProcessor.AddFilter(&useragent.EveUserAgentFilter{})
 
 	inputRules := viper.GetStringSlice("input.rules")
 	if inputRules != nil {

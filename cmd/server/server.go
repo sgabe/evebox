@@ -121,6 +121,15 @@ func initViper() {
 
 	viper.SetDefault("database.postgresql.password", "")
 	viper.BindEnv("database.postgresql.password", "PGPASSWORD")
+
+	// Defaults for MikroTik RouterOS API integration.
+	viper.SetDefault("mikrotik.enabled", false)
+	viper.SetDefault("mikrotik.address", "192.168.88.1:8728")
+	viper.SetDefault("mikrotik.username", "evebox")
+	viper.SetDefault("mikrotik.password", "evebox")
+	viper.SetDefault("mikrotik.async", false)
+	viper.SetDefault("mikrotik.tls", false)
+	viper.SetDefault("mikrotik.list", "evebox")
 }
 
 func getElasticSearchKeyword(flagset *pflag.FlagSet) (bool, string) {

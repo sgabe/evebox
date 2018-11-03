@@ -190,3 +190,16 @@ event-services:
 
     # Open in new window. The default is the same window.
     target: new
+
+# MikroTik integration that allows to add the source IP address
+# of an alert to an address list using the RouterOS API.
+mikrotik:
+  enabled: false
+  address: 192.168.88.1:8728
+  username: evebox
+  password: evebox
+  async: false
+  # Use a secure connection.
+  tls: false
+  # Name of the address list.
+  list: evebox

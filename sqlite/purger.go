@@ -57,7 +57,7 @@ func (p *SqlitePurger) Run() {
 func (p *SqlitePurger) Purge() (int64, error) {
 
 	now := time.Now()
-	then := now.AddDate(0, 0, (p.period+1)*-1)
+	then := now.AddDate(0, 0, p.period*-1)
 	log.Info("Deleting events prior to %v", eve.FormatTimestamp(then))
 
 	tx, err := p.db.GetTx()

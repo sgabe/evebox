@@ -90,6 +90,10 @@ func initViper() {
 	viper.SetDefault("database.retention-period", 0)
 	viper.BindEnv("database.retention-period", "RETENTION_PERIOD")
 
+	// Per-cycle purging limit.
+	viper.SetDefault("database.purging-limit", 1000)
+	viper.BindEnv("database.purging-limit", "PURGING_LIMIT")
+
 	viper.BindEnv("input.bookmark-directory", "BOOKMARK_DIRECTORY")
 
 	viper.SetDefault("authentication.required", false)

@@ -93,10 +93,14 @@ func InitPurger(db *SqliteService) {
 	retentionPeriod := viper.GetInt("database.retention-period")
 	log.Info("Retention period: %d days", retentionPeriod)
 
+	purgingLimit := viper.GetInt64("database.purging-limit")
+	log.Info("Per-cycle purging limit: %d events", purgingLimit)
+
 	// Start the purge runner.
 	go (&SqlitePurger{
 		db:     db,
 		period: retentionPeriod,
+		limit:  purgingLimit,
 	}).Run()
 }
 

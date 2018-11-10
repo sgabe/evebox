@@ -34,11 +34,10 @@ import (
 	"time"
 )
 
-var LIMIT int64 = 1000
-
 type SqlitePurger struct {
 	db     *SqliteService
 	period int
+	limit int64
 }
 
 func (p *SqlitePurger) Run() {
@@ -47,7 +46,7 @@ func (p *SqlitePurger) Run() {
 	}
 	for {
 		count, _ := p.Purge()
-		if count < LIMIT {
+		if count < p.limit {
 			time.Sleep(1 * time.Minute)
 		} else {
 			time.Sleep(100 * time.Millisecond)
@@ -81,7 +80,7 @@ where rowid in
      where timestamp < ?
      and escalated = 0
      limit ?)`
-	r, err := tx.Exec(q, then.UnixNano(), LIMIT)
+	r, err := tx.Exec(q, then.UnixNano(), p.limit)
 	if err != nil {
 		log.Error("%v", err)
 		return 0, err

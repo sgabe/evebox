@@ -89,6 +89,8 @@ database:
   # Retention period in days. 0 or comment out to disable.
   # Currently only applies to SQLite, not Elastic Search.
   #retention-period: 3
+  # Per-cycle purging limit (default: 1000; env: PURGING_LIMIT)
+  #purging-limit: 1000
 
 authentication:
 

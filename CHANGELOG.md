@@ -1,6 +1,8 @@
 # Change Log
 
 ## unreleased
+- Fix retention period calculation to allow 1 day retention.
+- Add configuration option for per-cycle purging limit.
 - Limited support for MikroTik RouterOS API.
 - Update to Angular 7.
 - Migrate to Go 1.11 module support. This requires Go 1.11, but no

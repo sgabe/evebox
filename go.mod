@@ -46,6 +46,7 @@ require (
 	golang.org/x/sys v0.0.0-20181029174526-d69651ed3497
 	golang.org/x/text v0.3.0
 	google.golang.org/appengine v1.2.0
+	gopkg.in/routeros.v2 v2.0.0-20171228113335-2dc19c12445c
 	gopkg.in/yaml.v2 v2.2.1
 )
 

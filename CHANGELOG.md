@@ -1,6 +1,8 @@
 # Change Log
 
 ## unreleased
+- Change retention period from number of days to duration string.
+- Fix purging query in SQLite by using human-readable timestamp.
 - Fix retention period calculation to allow 1 day retention.
 - Add configuration option for per-cycle purging limit.
 - Limited support for MikroTik RouterOS API.

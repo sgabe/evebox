@@ -87,8 +87,8 @@ database:
     #password:
 
   # Currently these only apply to SQLite, not Elastic Search.
-  # Retention period in days. (default: 0; env: RETENTION_PERIOD)
-  #retention-period: 3
+  # Retention period as duration string. (default: 0; env: RETENTION_PERIOD)
+  #retention-period: 3d
   # Per-cycle purging limit (default: 1000; env: PURGING_LIMIT)
   #purging-limit: 1000
 

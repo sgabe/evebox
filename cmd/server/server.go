@@ -86,8 +86,8 @@ func initViper() {
 	viper.SetDefault("elasticsearch", DEFAULT_ELASTICSEARCH_URL)
 	viper.SetDefault("index", DEFAULT_ELASTICSEARCH_INDEX)
 
-	// Retention period in days.
-	viper.SetDefault("database.retention-period", 0)
+	// Retention period as duration string.
+	viper.SetDefault("database.retention-period", "0")
 	viper.BindEnv("database.retention-period", "RETENTION_PERIOD")
 
 	// Per-cycle purging limit.

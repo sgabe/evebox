@@ -36,12 +36,12 @@ import (
 
 type SqlitePurger struct {
 	db     *SqliteService
-	period int
+	period string
 	limit int64
 }
 
 func (p *SqlitePurger) Run() {
-	if p.period == 0 {
+	if p.period == "0" {
 		return
 	}
 	for {
@@ -55,10 +55,15 @@ func (p *SqlitePurger) Run() {
 }
 
 func (p *SqlitePurger) Purge() (int64, error) {
+	period, err := time.ParseDuration(p.period)
+	if err != nil {
+		log.Error("%v", err)
+		return 0, err
+	}
 
 	now := time.Now()
-	then := now.AddDate(0, 0, p.period*-1)
-	log.Info("Deleting events prior to %v", eve.FormatTimestamp(then))
+	then := eve.FormatTimestamp(now.Add(- period))
+	log.Info("Deleting events prior to %v", then)
 
 	tx, err := p.db.GetTx()
 	if err != nil {
@@ -80,7 +85,7 @@ where rowid in
      where timestamp < ?
      and escalated = 0
      limit ?)`
-	r, err := tx.Exec(q, then.UnixNano(), p.limit)
+	r, err := tx.Exec(q, then, p.limit)
 	if err != nil {
 		log.Error("%v", err)
 		return 0, err

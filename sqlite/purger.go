@@ -62,8 +62,8 @@ func (p *SqlitePurger) Purge() (int64, error) {
 	}
 
 	now := time.Now()
-	then := eve.FormatTimestamp(now.Add(- period))
-	log.Info("Deleting events prior to %v", then)
+	then := now.Add(- period)
+	log.Info("Deleting events prior to %v", eve.FormatTimestamp(then))
 
 	tx, err := p.db.GetTx()
 	if err != nil {
@@ -85,7 +85,7 @@ where rowid in
      where timestamp < ?
      and escalated = 0
      limit ?)`
-	r, err := tx.Exec(q, then, p.limit)
+	r, err := tx.Exec(q, then.UnixNano(), p.limit)
 	if err != nil {
 		log.Error("%v", err)
 		return 0, err

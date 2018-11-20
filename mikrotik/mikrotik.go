@@ -35,7 +35,7 @@ import (
 	"github.com/jasonish/evebox/log"
 	"github.com/spf13/viper"
 	"gopkg.in/routeros.v2"
-	"errors"
+	"fmt"
 )
 
 // Connect to RouterOS API.
@@ -84,7 +84,7 @@ func GetIPAddressID(address string) (string, error) {
 		"=.proplist=.id")
 
 	if err != nil {
-		return id, errors.New("Failed to retrive ID of IP address")
+		return id, fmt.Errorf("Failed to retrieve ID of %s", address)
 	}
 
 	for _, re := range r.Re {
@@ -106,7 +106,7 @@ func AddIPAddressToList(address string, comment string) error {
 		"=disabled=no")
 
 	if err != nil {
-		err = errors.New("Failed to add IP address to list")
+		err = fmt.Errorf("Failed to add %s to %s with comment %s", address, list, comment)
 	}
 
 	return err
@@ -125,7 +125,7 @@ func RemoveIPAddressFromList(address string) error {
 		"=.id="+id)
 
 	if err != nil {
-		err = errors.New("Failed to remove IP address from list")
+		err = fmt.Errorf("Failed to remove %s with ID %s", address, id)
 	}
 
 	return err

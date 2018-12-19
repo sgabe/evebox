@@ -1,6 +1,6 @@
 # Change Log
 
-## unreleased
+## 0.10.0 - 2018-12-19
 - Change retention period from number of days to duration string.
 - Fix retention period calculation to allow 1 day retention.
 - Add configuration option for per-cycle purging limit.

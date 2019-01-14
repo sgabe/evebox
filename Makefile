@@ -40,11 +40,10 @@ GOPATH ?=	$(HOME)/go
 all: public evebox
 
 install-deps:
-	$(MAKE) -C webapp $@
 	go get github.com/cespare/reflex
 	go get github.com/gobuffalo/packr/packr
 	go get gopkg.in/routeros.v2
-	go mod download
+	cd webapp && $(MAKE) install-deps
 
 update-deps:
 	go get -u github.com/cespare/reflex
